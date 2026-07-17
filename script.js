@@ -1,43 +1,87 @@
+// =========================================
+// 1. HAMBURGER MENU TOGGLE
+// =========================================
 
-let valid = true;
+const menuToggle = document.getElementById('menuToggle');
+const menu = document.getElementById('menu');
 
-nameError.textContent = "";
-emailError.textContent = "";
-messageError.textContent = "";
+menuToggle.addEventListener('click', function () {
+    // Toggle active class on menu
+    menu.classList.toggle('active');
 
-if(name.value.trim() === ""){
+    // Toggle open class on button (for X animation)
+    this.classList.toggle('open');
 
-nameError.textContent =
-"Ad daxil edin";
+    // Update ARIA attribute for accessibility
+    const isOpen = menu.classList.contains('active');
+    this.setAttribute('aria-expanded', isOpen);
+    this.setAttribute('aria-label', isOpen ? 'Menyunu bağla' : 'Menyunu aç');
+});
 
-valid = false;
-}
+// Close menu when a link is clicked (on mobile)
+document.querySelectorAll('.header__menu a').forEach((link) => {
+    link.addEventListener('click', () => {
+        menu.classList.remove('active');
+        menuToggle.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Menyunu aç');
+    });
+});
 
-const emailRegex =
-/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// Close menu when clicking outside (optional)
+document.addEventListener('click', (e) => {
+    const isClickInside = menu.contains(e.target) || menuToggle.contains(e.target);
+    if (!isClickInside && menu.classList.contains('active')) {
+        menu.classList.remove('active');
+        menuToggle.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Menyunu aç');
+    }
+});
 
-if(!emailRegex.test(email.value)){
+// =========================================
+// 2. CONTACT FORM VALIDATION
+// =========================================
 
-emailError.textContent =
-"Düzgün email daxil edin";
+const form = document.getElementById('contactForm');
+const nameInput = document.getElementById('name');
+const emailInput = document.getElementById('email');
+const messageInput = document.getElementById('message');
+const nameError = document.getElementById('nameError');
+const emailError = document.getElementById('emailError');
+const messageError = document.getElementById('messageError');
 
-valid = false;
-}
+form.addEventListener('submit', function (e) {
+    e.preventDefault();
 
-if(message.value.trim() === ""){
+    let valid = true;
 
-messageError.textContent =
-"Mesaj boş ola bilməz";
+    // Clear previous errors
+    nameError.textContent = '';
+    emailError.textContent = '';
+    messageError.textContent = '';
 
-valid = false;
-}
+    // Validate name
+    if (nameInput.value.trim() === '') {
+        nameError.textContent = 'Ad daxil edin';
+        valid = false;
+    }
 
-if(valid){
+    // Validate email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(emailInput.value.trim())) {
+        emailError.textContent = 'Düzgün email daxil edin';
+        valid = false;
+    }
 
-alert("Mesaj uğurla göndərildi.");
+    // Validate message
+    if (messageInput.value.trim() === '') {
+        messageError.textContent = 'Mesaj boş ola bilməz';
+        valid = false;
+    }
 
-form.reset();
-
-}
-
+    if (valid) {
+        alert('✅ Mesaj uğurla göndərildi.');
+        form.reset();
+    }
 });
