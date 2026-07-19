@@ -1,4 +1,4 @@
-/* ===== RESET & BASE ===== */
+
 * {
     margin: 0;
     padding: 0;
@@ -55,7 +55,7 @@ section {
     color: #5c3d2e;
 }
 
-/* ===== HEADER ===== */
+
 .header {
     position: fixed;
     top: 0;
@@ -115,7 +115,7 @@ section {
     transform: rotate(-45deg) translate(5px, -6px);
 }
 
-/* ---- Menu ---- */
+
 .header__menu {
     display: none;
     position: absolute;
@@ -144,7 +144,7 @@ section {
     color: #8b5e3c;
 }
 
-/* ===== HERO ===== */
+
 .hero {
     height: 100vh;
     display: flex;
@@ -187,7 +187,7 @@ section {
     background: #6d472d;
 }
 
-/* ===== PRODUCTS ===== */
+
 .products__grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -307,7 +307,7 @@ button[type="submit"]:hover {
     background: #3f2a1e;
 }
 
-/* ===== FOOTER ===== */
+
 .footer {
     background: #2f1f14;
     color: #fff;
@@ -315,8 +315,7 @@ button[type="submit"]:hover {
     padding: 25px 20px;
 }
 
-/* ======================================== */
-/* ===== TABLET (768px and up) ===== */
+
 @media (min-width: 768px) {
 
     /* Hide hamburger */
@@ -350,8 +349,7 @@ button[type="submit"]:hover {
     }
 }
 
-/* ======================================== */
-/* ===== DESKTOP (1024px and up) ===== */
+
 @media (min-width: 1024px) {
     .products__grid {
         grid-template-columns: repeat(3, 1fr);
